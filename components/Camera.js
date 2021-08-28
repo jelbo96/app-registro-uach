@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Text, View, StyleSheet, Button, TouchableOpacity } from "react-native";
 import { BarCodeScanner } from "expo-barcode-scanner";
+import { Icon } from "react-native-elements";
 
 export default function Camera({
   startCamera,
@@ -18,7 +19,7 @@ export default function Camera({
     })();
   }, []);
 
-  const handleBarCodeScanned = ({ type, data }) => {
+  const handleBarCodeScanned = ({ type, data, bounds, cornerpoints }) => {
     /* Procesar el tipo de codigo */
 
     let regexCarnet =
@@ -26,6 +27,8 @@ export default function Camera({
     let regexPaseCovid =
       /^https:\/\/scanmevacuno\.gob\.cl\/\?a=[0-9]+&b=[0-9]+&c=[0-9]+$/i;
     let regexPaseUach = /^[0-9]+-[a-z,A-Z,0-9]$/i;
+
+    console.log("lectura camara", type, data, bounds, cornerpoints);
 
     if (regexCarnet.test(data)) {
       setValor({
@@ -74,28 +77,13 @@ export default function Camera({
         onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
         style={styles.camera}
       >
-        <TouchableOpacity
+        <Icon
+          raised
+          name="arrow-left"
+          type="font-awesome"
+          color="#000"
           onPress={() => setStartCamera(false)}
-          style={{
-            width: 130,
-            borderRadius: 4,
-            backgroundColor: "#14274e",
-            flexDirection: "row",
-            justifyContent: "center",
-            alignItems: "center",
-            height: 40,
-          }}
-        >
-          <Text
-            style={{
-              color: "#fff",
-              fontWeight: "bold",
-              textAlign: "center",
-            }}
-          >
-            Volver
-          </Text>
-        </TouchableOpacity>
+        />
       </BarCodeScanner>
       {/*   {scanned && (
         <Button title={"Tap to Scan Again"} onPress={() => setScanned(false)} />
