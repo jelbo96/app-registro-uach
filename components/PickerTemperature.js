@@ -9,7 +9,12 @@ const PickerTemperature = ({
 }) => {
   return (
     <Picker
-      style={{ width: "90%", fontSize: 26, fontWeight: "bold" }}
+      style={{
+        width: "100%",
+        fontSize: 26,
+        fontWeight: "bold",
+        marginBottom: 12,
+      }}
       ref={pickerRef}
       selectedValue={selectedTemperature}
       mode="dropdown"

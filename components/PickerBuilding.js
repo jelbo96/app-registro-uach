@@ -9,7 +9,12 @@ const PickerBuilding = ({
 }) => {
   return (
     <Picker
-      style={{ width: "90%", fontSize: 26, fontWeight: "bold" }}
+      style={{
+        width: "100%",
+        fontSize: 26,
+        fontWeight: "bold",
+        marginBottom: 24,
+      }}
       mode="dropdown"
       ref={pickerRef}
       selectedValue={selectedBuilding}

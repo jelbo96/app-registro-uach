@@ -71,9 +71,7 @@ export default function Home() {
             alignItems: "center",
           }} */
         >
-          <Text style={styles.textLabel}>
-            Metodo de validación: {valor.documentType}
-          </Text>
+          <Text style={styles.textLabel}>Metodo de validación:</Text>
 
           <Text style={styles.textBigLabel}>
             {!valor.documentType ? "Todavía no se escanea" : valor.documentType}
