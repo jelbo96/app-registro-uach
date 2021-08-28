@@ -4,11 +4,20 @@ import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import Camera from "./components/Camera";
 
 export default function App() {
-  const [valor, setValor] = useState("Prueba de captura de datos");
+  const [valor, setValor] = useState({ rut: "19413757-5", serie: "1234838" });
   const [startCamera, setStartCamera] = React.useState(false);
 
   const __startCamera = () => {
     setStartCamera(true);
+  };
+
+  const sendData = () => {
+    /* Añadir al objeto valor
+       building:
+       datetime:
+       temperature:
+    */
+    /* Enviar a firebase */
   };
 
   console.log("imprimiendo valor", valor);
@@ -19,6 +28,7 @@ export default function App() {
         <Camera
           startCamera={startCamera}
           setStartCamera={setStartCamera}
+          valor={valor}
           setValor={setValor}
         />
       ) : (
@@ -57,7 +67,7 @@ export default function App() {
               textAlign: "center",
             }}
           >
-            Camara: {valor}
+            Camara: {valor.rut}
           </Text>
 
           <TouchableOpacity
@@ -84,6 +94,7 @@ export default function App() {
           </TouchableOpacity>
 
           <TouchableOpacity
+            onPress={() => sendData()}
             style={{
               width: 130,
               borderRadius: 4,
