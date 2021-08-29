@@ -6,6 +6,18 @@ const PickerTemperature = ({
   selectedTemperature,
   setSelectedTemperature,
 }) => {
+  let temperatures = [
+    { key: 1, value: "34", name: "34 °C" },
+    { key: 2, value: "34.5", name: "34.5 °C" },
+    { key: 3, value: "35", name: "35 °C" },
+    { key: 4, value: "35.5", name: "35.5 °C" },
+    { key: 5, value: "36", name: "36 °C" },
+    { key: 6, value: "36.5", name: "36.5 °C" },
+    { key: 7, value: "37", name: "37 °C" },
+    { key: 8, value: "37.5", name: "37.5 °C" },
+    { key: 9, value: "38", name: "38 °C" },
+    { key: 10, value: ">38", name: ">38 °C" },
+  ];
   return (
     <Picker
       style={{
@@ -21,16 +33,9 @@ const PickerTemperature = ({
         setSelectedTemperature(itemValue)
       }
     >
-      <Picker.Item label="34 °C" value="34" />
-      <Picker.Item label="34.5 °C" value="34.5" />
-      <Picker.Item label="35 °C" value="35" />
-      <Picker.Item label="35.5 °C" value="35.5" />
-      <Picker.Item label="36 °C" value="36" />
-      <Picker.Item label="36.5 °C" value="36.5" />
-      <Picker.Item label="37 °C" value="37" />
-      <Picker.Item label="37.5 °C" value="37.5" />
-      <Picker.Item label="38 °C" value="38" />
-      <Picker.Item label=">38 °C" value=">38" />
+      {temperatures.map((temp) => (
+        <Picker.Item key={temp.key} label={temp.name} value={temp.value} />
+      ))}
     </Picker>
   );
 };
