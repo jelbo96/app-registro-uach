@@ -35,11 +35,11 @@ export default function Home() {
         if (error) {
           // The write failed...
 
-          alert("Error", "Ocurrió un problema");
+          alert("Ocurrió un problema");
 
           setValor({ rut: "---------", serie: "-------" });
         } else {
-          alert("OK", "Se guardo la información");
+          alert("Se guardo la información");
 
           setValor({ rut: "---------", serie: "-------" });
         }
