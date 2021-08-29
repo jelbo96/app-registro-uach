@@ -5,10 +5,12 @@ import Camera from "./Camera";
 import PickerTemperature from "./PickerTemperature";
 import PickerBuilding from "./PickerBuilding";
 
-import { postFirebase } from "./FirebaseHelpers";
+import uuid from "react-native-uuid";
 
 import { Button } from "react-native-elements";
 import Icon from "react-native-vector-icons/FontAwesome";
+
+import firebase from "firebase/app";
 
 export default function Home() {
   const [valor, setValor] = useState({ rut: "---------", serie: "-------" });
@@ -17,6 +19,34 @@ export default function Home() {
   const [selectedTemperature, setSelectedTemperature] = useState();
 
   const pickerRef = useRef();
+
+  function postFirebase(value) {
+    let date = new Date();
+    let year = date.getFullYear();
+    let month = date.getUTCMonth();
+    let day = date.getDate();
+    let build = value.building;
+    let id = uuid.v4(); /* Genera id aleatorio */
+
+    firebase
+      .database()
+      .ref(`${year}/${month}/${day}/${build}/${id}/`)
+      .set(value, (error) => {
+        if (error) {
+          // The write failed...
+
+          alert("Error", "Ocurrió un problema");
+
+          setValor({ rut: "---------", serie: "-------" });
+        } else {
+          alert("OK", "Se guardo la información");
+
+          setValor({ rut: "---------", serie: "-------" });
+        }
+      });
+
+    /* TODO confimar que se envio la info y limpiar el objeto value*/
+  }
 
   const __startCamera = () => {
     setStartCamera(true);
