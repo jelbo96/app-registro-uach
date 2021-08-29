@@ -52,9 +52,9 @@ export default function Camera({
       });
     } else {
       alert("El código no es válido");
+      setValor({ rut: "---------", serie: "-------" });
     }
 
-    /* alert(JSON.stingify(valor)); */
     console.log(valor);
     setScanned(true);
     setStartCamera(false);
@@ -85,9 +85,6 @@ export default function Camera({
           onPress={() => setStartCamera(false)}
         />
       </BarCodeScanner>
-      {/*   {scanned && (
-        <Button title={"Tap to Scan Again"} onPress={() => setScanned(false)} />
-      )} */}
     </View>
   );
 }

@@ -1,15 +1,11 @@
 import { StatusBar } from "expo-status-bar";
 import React, { useState, useRef } from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-  TouchableOpacity,
-  ScrollView,
-} from "react-native";
+import { StyleSheet, Text, View, ScrollView } from "react-native";
 import Camera from "./Camera";
 import PickerTemperature from "./PickerTemperature";
 import PickerBuilding from "./PickerBuilding";
+
+import { postFirebase } from "./FirebaseHelpers";
 
 import { Button } from "react-native-elements";
 import Icon from "react-native-vector-icons/FontAwesome";
@@ -22,34 +18,18 @@ export default function Home() {
 
   const pickerRef = useRef();
 
-  function open() {
-    pickerRef.current.focus();
-  }
-
-  function close() {
-    pickerRef.current.blur();
-  }
-
   const __startCamera = () => {
     setStartCamera(true);
   };
 
   const sendData = () => {
-    /* Añadir al objeto valor
-       building:
-       datetime:
-       temperature:
-    */
-    setValor({
+    /* Enviar la info a firebase sin setear valor */
+    postFirebase({
       ...valor,
-      building: selectedBuilding /* A partir de selector */,
+      building: selectedBuilding,
       datetime: new Date().toLocaleString(),
-      temperature: selectedTemperature /* A Partir de selector */,
+      temperature: selectedTemperature,
     });
-
-    console.log(valor);
-
-    /* Enviar a firebase */
   };
 
   return (
@@ -62,15 +42,7 @@ export default function Home() {
           setValor={setValor}
         />
       ) : (
-        <ScrollView
-          style={styles.scroll}
-          /*  style={{
-            flex: 1,
-            backgroundColor: "#fff",
-            justifyContent: "center",
-            alignItems: "center",
-          }} */
-        >
+        <ScrollView style={styles.scroll}>
           <Text style={styles.textLabel}>Metodo de validación:</Text>
 
           <Text style={styles.textBigLabel}>
@@ -110,6 +82,7 @@ export default function Home() {
             <Button
               icon={<Icon name="save" size={20} color="white" />}
               title=" Guardar"
+              disabled={valor.rut == "---------" ? true : false}
               onPress={() => sendData()}
               buttonStyle={[styles.button, styles.buttonSave]}
             />
