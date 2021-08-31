@@ -32,6 +32,16 @@ const firebaseConfig = {
   appId: FIREBASE_APP_ID,
 };
 
+/* const firebaseConfig = {
+  apiKey: "AIzaSyACoiJAzJLkL82dJZR4D1KtZSTNX0UAQmk",
+  authDomain: "app-registro-uach.firebaseapp.com",
+  projectId: "app-registro-uach",
+  databaseURL: "https://app-registro-uach-default-rtdb.firebaseio.com/",
+  storageBucket: "app-registro-uach.appspot.com",
+  messagingSenderId: "316102660619",
+  appId: "1:316102660619:web:e141dc6cfdf01f0da7ad0e",
+};
+ */
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 

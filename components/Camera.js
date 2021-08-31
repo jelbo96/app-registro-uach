@@ -51,6 +51,7 @@ export default function Camera({
         rut: data,
       });
     } else {
+      console.log(data);
       alert("El código no es válido");
       setValor({ rut: "---------", serie: "-------" });
     }

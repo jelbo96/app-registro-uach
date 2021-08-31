@@ -15,8 +15,8 @@ import firebase from "firebase/app";
 export default function Home() {
   const [valor, setValor] = useState({ rut: "---------", serie: "-------" });
   const [startCamera, setStartCamera] = React.useState(false);
-  const [selectedBuilding, setSelectedBuilding] = useState();
-  const [selectedTemperature, setSelectedTemperature] = useState();
+  const [selectedBuilding, setSelectedBuilding] = useState(34);
+  const [selectedTemperature, setSelectedTemperature] = useState("1k");
 
   const pickerRef = useRef();
 
