@@ -78,13 +78,17 @@ export default function Camera({
         onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
         style={styles.camera}
       >
-        <Icon
-          raised
-          name="arrow-left"
-          type="font-awesome"
-          color="#000"
-          onPress={() => setStartCamera(false)}
-        />
+        {scanned == true && (
+          <Icon
+            raised
+            name="repeat"
+            type="font-awesome"
+            color="#000"
+            onPress={() => {
+              setScanned(false);
+            }}
+          />
+        )}
       </BarCodeScanner>
     </View>
   );

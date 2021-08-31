@@ -17,7 +17,7 @@ export default function Home() {
   const [valor, setValor] = useState({ rut: "---------", serie: "-------" });
   const [startCamera, setStartCamera] = React.useState(false);
   const [selectedBuilding, setSelectedBuilding] = useState("Miraflores");
-  const [selectedTemperature, setSelectedTemperature] = useState("'Normal");
+  const [selectedTemperature, setSelectedTemperature] = useState("Normal");
 
   const pickerRef = useRef();
 
@@ -65,72 +65,49 @@ export default function Home() {
 
   return (
     <View style={styles.container}>
-      {startCamera ? (
-        <Camera
-          startCamera={startCamera}
-          setStartCamera={setStartCamera}
-          valor={valor}
-          setValor={setValor}
+      <Camera
+        startCamera={startCamera}
+        setStartCamera={setStartCamera}
+        valor={valor}
+        setValor={setValor}
+      />
+      <ScrollView style={styles.scroll}>
+        <Text style={styles.textLabel}>Metodo de validación:</Text>
+
+        <Text style={styles.textBigLabel}>
+          {!valor.documentType ? "Todavía no se escanea" : valor.documentType}
+        </Text>
+
+        <Text style={styles.textLabel}>RUT:</Text>
+
+        <Text style={styles.textBigLabel}>
+          {valor.documentType == "paseCovid" ? "Valor oculto" : valor.rut}
+        </Text>
+
+        <Text style={styles.textLabel}>Temperatura:</Text>
+
+        <SelectTemperature
+          selectedTemperature={selectedTemperature}
+          setSelectedTemperature={setSelectedTemperature}
         />
-      ) : (
-        <ScrollView style={styles.scroll}>
-          <Text style={styles.textLabel}>Metodo de validación:</Text>
 
-          <Text style={styles.textBigLabel}>
-            {!valor.documentType ? "Todavía no se escanea" : valor.documentType}
-          </Text>
+        <Text style={styles.textLabel}>Edificio:</Text>
 
-          <Text style={styles.textLabel}>RUT:</Text>
+        <SelectBuilding
+          selectedBuilding={selectedBuilding}
+          setSelectedBuilding={setSelectedBuilding}
+        />
 
-          <Text style={styles.textBigLabel}>
-            {valor.documentType == "paseCovid" ? "Valor oculto" : valor.rut}
-          </Text>
-
-          <Text style={styles.textLabel}>Temperatura:</Text>
-          {/* 
-          <PickerTemperature
-            pickerRef={pickerRef}
-            selectedTemperature={selectedTemperature}
-            setSelectedTemperature={setSelectedTemperature}
-          /> */}
-
-          <SelectTemperature
-            selectedTemperature={selectedTemperature}
-            setSelectedTemperature={setSelectedTemperature}
+        <View style={styles.containerButtons}>
+          <Button
+            icon={<Icon name="save" size={20} color="white" />}
+            title=" Guardar"
+            disabled={valor.rut == "---------" ? true : false}
+            onPress={() => sendData()}
+            buttonStyle={[styles.button, styles.buttonSave]}
           />
-
-          <Text style={styles.textLabel}>Edificio:</Text>
-
-          {/*  <PickerBuilding
-            pickerRef={pickerRef}
-            selectedBuilding={selectedBuilding}
-            setSelectedBuilding={setSelectedBuilding}
-          />
- */}
-
-          <SelectBuilding
-            selectedBuilding={selectedBuilding}
-            setSelectedBuilding={setSelectedBuilding}
-          />
-
-          <View style={styles.containerButtons}>
-            {/*   <Button
-              icon={<Icon name="camera" size={20} color="white" />}
-              title=" Escanear"
-              onPress={__startCamera}
-              buttonStyle={styles.button}
-            />
- */}
-            <Button
-              icon={<Icon name="save" size={20} color="white" />}
-              title=" Guardar"
-              disabled={valor.rut == "---------" ? true : false}
-              onPress={() => sendData()}
-              buttonStyle={[styles.button, styles.buttonSave]}
-            />
-          </View>
-        </ScrollView>
-      )}
+        </View>
+      </ScrollView>
 
       <StatusBar style="auto" />
     </View>
