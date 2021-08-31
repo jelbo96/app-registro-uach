@@ -34,10 +34,10 @@ export default function Camera({
       setValor({
         documentType: "carnet",
         rut: data.substring(data.indexOf("RUN=") + 4, data.indexOf("&type")),
-        serie: data.substring(
+        /*   serie: data.substring(
           data.indexOf("serial=") + 7,
           data.indexOf("&mrz")
-        ),
+        ), */
       });
     } else if (regexPaseCovid.test(data)) {
       setValor({

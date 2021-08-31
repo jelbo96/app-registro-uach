@@ -2,8 +2,9 @@ import { StatusBar } from "expo-status-bar";
 import React, { useState, useRef } from "react";
 import { StyleSheet, Text, View, ScrollView } from "react-native";
 import Camera from "./Camera";
-import PickerTemperature from "./PickerTemperature";
-import PickerBuilding from "./PickerBuilding";
+
+import SelectBuilding from "./SelectBuilding";
+import SelectTemperature from "./SelectTemperature";
 
 import uuid from "react-native-uuid";
 
@@ -15,8 +16,8 @@ import firebase from "firebase/app";
 export default function Home() {
   const [valor, setValor] = useState({ rut: "---------", serie: "-------" });
   const [startCamera, setStartCamera] = React.useState(false);
-  const [selectedBuilding, setSelectedBuilding] = useState(34);
-  const [selectedTemperature, setSelectedTemperature] = useState("1k");
+  const [selectedBuilding, setSelectedBuilding] = useState("Miraflores");
+  const [selectedTemperature, setSelectedTemperature] = useState("'Normal");
 
   const pickerRef = useRef();
 
@@ -86,29 +87,40 @@ export default function Home() {
           </Text>
 
           <Text style={styles.textLabel}>Temperatura:</Text>
-
+          {/* 
           <PickerTemperature
             pickerRef={pickerRef}
+            selectedTemperature={selectedTemperature}
+            setSelectedTemperature={setSelectedTemperature}
+          /> */}
+
+          <SelectTemperature
             selectedTemperature={selectedTemperature}
             setSelectedTemperature={setSelectedTemperature}
           />
 
           <Text style={styles.textLabel}>Edificio:</Text>
 
-          <PickerBuilding
+          {/*  <PickerBuilding
             pickerRef={pickerRef}
+            selectedBuilding={selectedBuilding}
+            setSelectedBuilding={setSelectedBuilding}
+          />
+ */}
+
+          <SelectBuilding
             selectedBuilding={selectedBuilding}
             setSelectedBuilding={setSelectedBuilding}
           />
 
           <View style={styles.containerButtons}>
-            <Button
+            {/*   <Button
               icon={<Icon name="camera" size={20} color="white" />}
               title=" Escanear"
               onPress={__startCamera}
               buttonStyle={styles.button}
             />
-
+ */}
             <Button
               icon={<Icon name="save" size={20} color="white" />}
               title=" Guardar"
@@ -150,7 +162,7 @@ const styles = StyleSheet.create({
   containerButtons: {
     flexDirection: "row",
     justifyContent: "space-around",
-
+    paddingTop: 16,
     width: "100%",
   },
   button: {
